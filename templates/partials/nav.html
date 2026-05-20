@@ -1,0 +1,73 @@
+<nav x-data="menu" class="container px-4 mx-auto font-mono">
+  <div class="flex justify-between items-center w-full h-16">
+    <div x-data="theme" class="flex items-center space-x-2 shrink-0">
+      <a href="/" class="flex items-center space-x-2">
+        {% if config.extra.nav_logo %}
+          <img src="{{ config.rootUrl }}{{ config.extra.nav_logo }}" alt="Site logo" class="w-8 h-8">
+        {% endif %}
+        <span id="nav-title" class="text-2xl font-bold font-display">{{ config.title | title }}</span>
+      </a>
+      <button
+        @click="toggle"
+        type="button"
+        class="flex items-center ml-2"
+        :aria-label="current === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+      >
+        <i
+          :class="current === 'dark' ? 'ti-sun hover:text-yellow' : 'ti-moon hover:text-blue'"
+          class="text-xl transition-colors duration-200 ease-in-out md:text-2xl ti text-text-muted"
+        ></i>
+      </button>
+    </div>
+
+    {# Desktop menu #}
+    <div class="hidden md:flex md:items-center md:space-x-8">
+      {% for name, link in config.extra.nav %}
+        <a
+          :class="currentPage.startsWith('{{ link }}') ? 'text-primary border-b-primary' : 'text-text-muted border-b-transparent hover:text-primary'"
+          class="my-1 border-b-2 border-dotted"
+          href="{{ link }}"
+        >{{ name | title }}</a>
+      {% endfor %}
+    </div>
+
+    {# Mobile menu button #}
+    <div class="md:hidden">
+      <button @click="toggleMobile" type="button" class="inline-flex justify-center items-center p-2 rounded-md focus:outline-none text-dark-grey hover:text-text-alt" aria-controls="mobile-menu" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <!-- Hamburger Icon -->
+        <svg x-show="!openMobile" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <!-- Close Icon -->
+        <svg x-show="openMobile" class="w-5 h-5 text-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {# Mobile menu #}
+  <div
+    x-show="openMobile"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    @click.outside="openMobile = false"
+    class="md:hidden"
+    id="mobile-menu"
+  >
+    <div class="flex flex-col justify-between items-end pb-4">
+      {% for name, link in config.extra.nav %}
+      <a
+        :class="currentPage.startsWith('{{ link }}') ? 'text-primary border-b-primary' : 'text-text-muted border-b-transparent hover:text-primary'"
+        class="my-1 border-b-2 border-dotted"
+        href="{{ link }}"
+      >{{ name | title }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</nav>

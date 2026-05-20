@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+/* Reload from content and templates to ensure styles are applied to user content and theme templates */
+@source "../../../content";
+@source "../../../templates";
+@source "../../templates";
+
+/* ============================================================================
+   Custom fonts
+   ============================================================================ */
+@font-face {
+  font-family: "Nunito Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 1000;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/nunito:vf@latest/latin-wght-normal.woff2)
+    format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Nunito Variable";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 200 1000;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/nunito:vf@latest/latin-wght-italic.woff2)
+    format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Outfit Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/outfit:vf@latest/latin-wght-normal.woff2)
+    format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Martian Mono Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  font-stretch: 75% 112.5%;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/martian-mono:vf@latest/latin-wdth-normal.woff2)
+    format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+/* Use dark class for dark theme */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================================
+   Colorscheme and theme variables
+   ============================================================================ */
+:root {
+  --bg: #f4f4f8;
+  --surface: #ebebf2;
+  --text: #2d2d3a;
+  --text-muted: #7c7c9a;
+  --primary: #6c63a8;
+  --secondary: #4db8b8;
+  --border: #d8d8e8;
+  --green: #5e9e82;
+  --blue: #5c85b8;
+  --violet: #7c6fb5;
+  --yellow: #b98052;
+  --red: #b85c70;
+}
+
+:root.dark {
+  --bg: #1a1a2e;
+  --surface: #22223b;
+  --text: #e0dff0;
+  --text-muted: #9090b8;
+  --primary: #9d8fe8;
+  --secondary: #4db8b8;
+  --border: #2e2e4a;
+  --green: #7bbfa0;
+  --blue: #80a8d8;
+  --violet: #a896ec;
+  --yellow: #d4b074;
+  --red: #d48a9a;
+}
+
+@theme static {
+  --font-sans:
+    "Nunito Variable", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display:
+    "Outfit Variable", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    "Martian Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-border: var(--border);
+  --color-green: var(--green);
+  --color-blue: var(--blue);
+  --color-violet: var(--violet);
+  --color-yellow: var(--yellow);
+  --color-red: var(--red);
+}
+
+/* ============================================================================
+   Base styles for typography and elements
+   ============================================================================ */
+@layer base {
+  html {
+    scrollbar-color: var(--color-primary) var(--color-surface);
+    @apply scroll-smooth tabular-nums font-sans;
+  }
+
+  body {
+    @apply bg-bg text-text;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display text-text;
+  }
+
+  h1 {
+    @apply text-4xl font-bold my-4;
+  }
+  h2 {
+    @apply text-3xl font-semibold my-3;
+  }
+  h3 {
+    @apply text-2xl font-semibold my-2;
+  }
+  h4 {
+    @apply text-xl font-semibold my-2;
+  }
+  h5 {
+    @apply text-lg font-semibold my-1;
+  }
+  h6 {
+    @apply text-base font-semibold my-[2px];
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  ul, ol {
+    @apply pl-6;
+  }
+  ul {
+    @apply list-disc;
+  }
+  ol {
+    @apply list-decimal;
+  }
+
+  blockquote {
+    @apply border-l-4 border-primary/60 bg-surface/70 md:max-w-fit py-2 px-4 rounded-r italic text-text-muted mb-4;
+  }
+  blockquote.tip {
+    @apply border-green bg-green/30 text-text/80;
+  }
+  blockquote.note {
+    @apply border-blue bg-blue/30 text-text/80;
+  }
+  blockquote.important {
+    @apply border-violet bg-violet/30 text-text/80;
+  }
+  blockquote.warning {
+    @apply border-yellow bg-yellow/30 text-text/80;
+  }
+  blockquote.error {
+    @apply border-red bg-red/30 text-text/80;
+  }
+
+  /* Inline verbatim `` */
+  code:not([class*="language-"]) {
+    @apply font-mono bg-surface/70 px-1 rounded text-sm;
+  }
+
+  a {
+    @apply transition-colors duration-200 ease-in-out;
+  }
+  a.icon {
+    @apply no-underline;
+  }
+  main a {
+    @apply underline hover:text-primary;
+  }
+
+  hr {
+    @apply text-border dark:brightness-120 my-4;
+  }
+
+  /* Buttons use pointer cursor */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+/*
+ * Fix some code rendering bugs with PrismJS
+ * See https://github.com/PrismJS/prism/issues/2443
+ */
+@layer utilities {
+  .table {
+    display: initial;
+  }
+}
+
+/* ============================================================================
+   Custom styles for theme components and user content
+   ============================================================================ */
+#nav-title::after {
+  content: "▪";
+  font-size: 0.65rem;
+  color: var(--color-primary);
+}
+
+/* ============================================================================
+   PrismJS syntax highlighting styles
+   ============================================================================ */
+pre[class*="language-"].line-numbers {
+  counter-reset: linenumber;
+  @apply relative pl-13;
+}
+
+pre[class*="language-"].line-numbers > code {
+  white-space: inherit;
+  @apply relative;
+}
+
+.line-numbers .line-numbers-rows {
+  @apply absolute flex flex-col top-0 -left-12 w-10 pointer-events-none select-none border-r border-r-border;
+}
+
+.line-numbers-rows > span {
+  counter-increment: linenumber;
+  @apply block;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  @apply text-text-muted text-right pr-2 block;
+}
+
+/* ============================================================================
+   MermaidJS integration
+   ============================================================================ */
+/* Center MermaidJS charts and diagrams */
+pre.mermaid {
+  @apply flex justify-center;
+}
+
+/* Automatic dark theme for MermaidJS */
+.dark .mermaid {
+  filter: invert(0.9) hue-rotate(180deg);
+}
