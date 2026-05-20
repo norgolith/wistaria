@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block seo_tags %}
+<meta property="og:title" content="{{ metadata.title | title }} - {{ config.title | title }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ metadata.permalink }}" />
+<meta property="og:description" content="Posts on {{ config.title | title }}" />
+<meta property="og:site_name" content="{{ config.title }}" />
+<meta property="og:locale" content="{{ config.language }}" />
+{# TODO: add support for og:image using metadata #}
+<link rel="canonical" href="{{ metadata.permalink }}" />
+<meta name="robots" content="index, follow" />
+{% endblock seo_tags %}
+
+{% block title %}{{ metadata.title | title }}{% endblock title %}
+{% block content %}
+  <h1>Journal</h1>
+  {% if metadata.description and metadata.description != "nil" %}
+  <p>{{ metadata.description }}</p>
+  {% else %}
+  <p>
+    Collection of longer thoughts and main articles.
+    This is where you will find the most substantial writing.
+  </p>
+  {% endif %}
+  <div class="flex flex-col gap-8 pt-6 mt-6 border-t border-t-border">
+    {% for post in posts | filter(attribute="draft", value=false) | sort(attribute="created") | reverse %}
+      <div class="flex flex-col md:flex-row md:gap-8">
+        <span class="text-sm font-semibold tabular-nums md:my-3.5 min-w-fit text-muted md:pt-4.5">
+          <time datetime="{{ post.created }}">{{ post.created | date(format="%B %e, %Y") }}</time>
+        </span>
+        <div class="flex flex-col gap-1 w-full">
+          <a href="{{ post.permalink }}" class="no-underline! hover:text-text flex flex-col gap-1">
+            <h2 class="md:pt-2 mt-0! md:mt-3 mb-1">{{ post.title }}</h2>
+            <p>{{ post.description }}</p>
+          </a>
+          {# Tag badges #}
+          {% if post.categories | length > 0 %}
+            <div class="flex flex-wrap items-center mt-2 space-y-2">
+              {% for category in post.categories %}
+                {% if config.extra.tags and category in config.extra.tags %}
+                  {% set tag_color = config.extra.tags[category] %}
+                {% else %}
+                  {% set tag_color = "" %}
+                {% endif %}
+                <a
+                  {% if tag_color %}style="--tag-color: {% if tag_color is starting_with('#') or tag_color is starting_with('rgb') or tag_color is starting_with('hsl') or tag_color is starting_with('oklch') %}{{ tag_color }}{% else %}var(--color-{{ tag_color }}){% endif %}"{% endif %}
+                  class="w-fit {% if tag_color %}bg-[color-mix(in_oklab,var(--tag-color)_25%,transparent)] text-(--tag-color) hover:bg-[color-mix(in_oklab,var(--tag-color)_50%,transparent)]{% else %}bg-surface/80 dark:bg-surface/60 text-muted hover:text-text hover:bg-surface{% endif %} no-underline! hover:no-underline! text-sm mr-2 last:mr-0 last:mb-2 px-4 py-1 rounded-full"
+                  href="/library/{{ category | slugify }}"
+                >
+                  {{ category | capitalize }}
+                </a>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

@@ -71,7 +71,7 @@
   --bg: #f4f4f8;
   --surface: #ebebf2;
   --text: #2d2d3a;
-  --text-muted: #7c7c9a;
+  --muted: #7c7c9a;
   --primary: #6c63a8;
   --secondary: #4db8b8;
   --border: #d8d8e8;
@@ -83,10 +83,10 @@
 }
 
 :root.dark {
-  --bg: #1a1a2e;
-  --surface: #22223b;
+  --bg: #141219;
+  --surface: #211f25;
   --text: #e0dff0;
-  --text-muted: #9090b8;
+  --muted: #9090b8;
   --primary: #9d8fe8;
   --secondary: #4db8b8;
   --border: #2e2e4a;
@@ -111,7 +111,7 @@
   --color-bg: var(--bg);
   --color-surface: var(--surface);
   --color-text: var(--text);
-  --color-text-muted: var(--text-muted);
+  --color-muted: var(--muted);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-border: var(--border);
@@ -178,7 +178,7 @@
   }
 
   blockquote {
-    @apply border-l-4 border-primary/60 bg-surface/70 md:max-w-fit py-2 px-4 rounded-r italic text-text-muted mb-4;
+    @apply border-l-4 border-primary/60 bg-surface/70 md:max-w-fit py-2 px-4 rounded-r italic text-muted mb-4;
   }
   blockquote.tip {
     @apply border-green bg-green/30 text-text/80;
@@ -265,7 +265,7 @@ pre[class*="language-"].line-numbers > code {
 
 .line-numbers-rows > span:before {
   content: counter(linenumber);
-  @apply text-text-muted text-right pr-2 block;
+  @apply text-muted text-right pr-2 block;
 }
 
 /* ============================================================================

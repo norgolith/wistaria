@@ -1,4 +1,4 @@
-<nav x-data="menu" class="container px-4 mx-auto font-mono">
+<nav x-data="menu" class="container px-8 mx-auto font-mono md:px-16 lg:px-24">
   <div class="flex justify-between items-center w-full h-16">
     <div x-data="theme" class="flex items-center space-x-2 shrink-0">
       <a href="/" class="flex items-center space-x-2">
@@ -15,7 +15,7 @@
       >
         <i
           :class="current === 'dark' ? 'ti-sun hover:text-yellow' : 'ti-moon hover:text-blue'"
-          class="text-xl transition-colors duration-200 ease-in-out md:text-2xl ti text-text-muted"
+          class="text-xl transition-colors duration-200 ease-in-out md:text-2xl ti text-muted"
         ></i>
       </button>
     </div>
@@ -24,7 +24,7 @@
     <div class="hidden md:flex md:items-center md:space-x-8">
       {% for name, link in config.extra.nav %}
         <a
-          :class="currentPage.startsWith('{{ link }}') ? 'text-primary border-b-primary' : 'text-text-muted border-b-transparent hover:text-primary'"
+          :class="currentPage.startsWith('{{ link }}') ? 'text-primary border-b-primary' : 'text-muted border-b-transparent hover:text-primary'"
           class="my-1 border-b-2 border-dotted"
           href="{{ link }}"
         >{{ name | title }}</a>
@@ -33,7 +33,7 @@
 
     {# Mobile menu button #}
     <div class="md:hidden">
-      <button @click="toggleMobile" type="button" class="inline-flex justify-center items-center p-2 rounded-md focus:outline-none text-dark-grey hover:text-text-alt" aria-controls="mobile-menu" aria-expanded="false">
+      <button @click="toggleMobile" type="button" class="inline-flex justify-center items-center p-2 rounded-md focus:outline-none text-muted" aria-controls="mobile-menu" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
         <!-- Hamburger Icon -->
         <svg x-show="!openMobile" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -63,7 +63,7 @@
     <div class="flex flex-col justify-between items-end pb-4">
       {% for name, link in config.extra.nav %}
       <a
-        :class="currentPage.startsWith('{{ link }}') ? 'text-primary border-b-primary' : 'text-text-muted border-b-transparent hover:text-primary'"
+        :class="currentPage.startsWith('{{ link }}') ? 'text-primary border-b-primary' : 'text-muted border-b-transparent hover:text-primary'"
         class="my-1 border-b-2 border-dotted"
         href="{{ link }}"
       >{{ name | title }}</a>
