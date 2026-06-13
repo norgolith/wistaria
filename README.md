@@ -125,10 +125,14 @@ Wistaria provides some additional styling options for blockquotes and code block
 - `warning` (yellow)
 - `error` (red)
 
+<img width="1380" height="340" alt="image" src="https://github.com/user-attachments/assets/e29d8368-3934-4e3a-aafb-43b6608f1668" />
+
 #### Code Blocks
 
 - `line-numbers` - Adds line numbers to the code block.
 - `diff-highlight` - Highlights added lines in green and removed lines in red (useful for diff outputs).
+
+<img width="1372" height="238" alt="image" src="https://github.com/user-attachments/assets/bd1c9e8e-e7cd-4b81-8805-e3f3cb78af9b" />
 
 #### Tags/categories pills
 
@@ -139,6 +143,8 @@ log = 'red'
 essay = 'primary'
 announcement = '#72ff47'
 ```
+
+<img width="1392" height="485" alt="image" src="https://github.com/user-attachments/assets/8fa48976-be3a-4c1b-a5b1-5aadab9be835" />
 
 ### Tailwind Reloading
 
