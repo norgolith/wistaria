@@ -241,6 +241,67 @@
   color: var(--color-primary);
 }
 
+.wistaria-toc-panel {
+  @apply rounded-xl border border-border bg-surface/70 backdrop-blur-sm shadow-xs px-3 py-3;
+}
+
+.wistaria-toc-header {
+  @apply flex items-center justify-between gap-2;
+}
+
+.wistaria-toc-title {
+  @apply text-xs uppercase tracking-wide font-semibold text-muted mb-0;
+}
+
+.wistaria-toc-toggle {
+  @apply h-7 w-7 inline-flex items-center justify-center rounded-md border border-border bg-bg/60 text-muted hover:text-text hover:bg-bg transition-colors;
+}
+
+.wistaria-toc-toggle .ti {
+  @apply transition-transform duration-200;
+}
+
+.wistaria-toc-nav {
+  @apply mt-2 text-sm;
+}
+
+.wistaria-toc-nav ol,
+.wistaria-toc-nav ul {
+  @apply list-none pl-0 my-0;
+}
+
+.wistaria-toc-nav li {
+  @apply my-1;
+}
+
+.wistaria-toc-nav li li {
+  @apply ml-2 pl-2 border-l border-border/70;
+}
+
+.wistaria-toc-nav a {
+  @apply block rounded-md px-2 py-1 no-underline text-muted hover:text-text hover:bg-bg/70 transition-colors;
+}
+
+.wistaria-toc-nav li[data-active-trail="true"] > a {
+  @apply text-text;
+}
+
+.wistaria-toc-nav a[data-active="true"] {
+  @apply bg-primary/15 text-primary font-semibold;
+}
+
+.wistaria-toc-fab {
+  @apply fixed z-40 bottom-5 right-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface text-text shadow-lg px-4 py-2 text-sm font-semibold;
+}
+
+.wistaria-toc-backdrop {
+  @apply fixed inset-0 z-40 bg-surface/80;
+}
+
+.wistaria-toc-drawer {
+  @apply fixed z-50 bottom-0 left-0 right-0 rounded-t-2xl border-t border-border bg-surface px-4 pt-4 pb-5 shadow-lg;
+}
+
 /* ============================================================================
    PrismJS syntax highlighting styles
    ============================================================================ */

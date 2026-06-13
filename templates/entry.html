@@ -13,44 +13,121 @@
 
 {% block title %}{{ metadata.title | title }}{% endblock title %}
 {% block content %}
-<div class="mb-4">
-  <h1>{{ metadata.title }}</h1>
-  <p class="italic">{{ metadata.description }}</p>
-</div>
-<div class="flex flex-col flex-1 justify-between">
-  <div class="flex flex-col space-y-2">
-    {# Date, reading time #}
-    {% set created = metadata.created | date(format="%B %e, %Y") %}
-    {% set updated = metadata.updated | date(format="%B %e, %Y") %}
-    <span class="text-grey text-sm tabular-nums text-opacity-70 dark:text-opacity-100 space-x-1">
-      <time datetime="{{ metadata.created }}">{{ created }}</time>
-      {% if created != updated %}
-      (Last edit: <time datetime="{{ metadata.updated }}">{{ metadata.updated | date(format="%B %e, %Y") }}</time>)
-      {% endif %}
-    </span>
+<div x-data="toc" x-init="init()" class="relative">
+  <div class="mb-4">
+    <h1>{{ metadata.title }}</h1>
+    <p class="italic">{{ metadata.description }}</p>
   </div>
-  {% if metadata.categories | length > 0 %}
-    <div class="flex flex-wrap items-center mt-2 space-y-2">
-      <span class="font-semibold mr-px">Tags:&nbsp;</span>
-      {% for category in metadata.categories %}
-        {% if config.extra.tags and category in config.extra.tags %}
-          {% set tag_color = config.extra.tags[category] %}
-        {% else %}
-          {% set tag_color = "" %}
-        {% endif %}
-        <a
-          {% if tag_color %}style="--tag-color: {% if tag_color is starting_with('#') or tag_color is starting_with('rgb') or tag_color is starting_with('hsl') or tag_color is starting_with('oklch') %}{{ tag_color }}{% else %}var(--color-{{ tag_color }}){% endif %}"{% endif %}
-          class="w-fit {% if tag_color %}bg-[color-mix(in_oklab,var(--tag-color)_25%,transparent)] text-(--tag-color) hover:bg-[color-mix(in_oklab,var(--tag-color)_50%,transparent)]{% else %}bg-surface/80 dark:bg-surface/60 text-muted hover:text-text hover:bg-surface{% endif %} no-underline! hover:no-underline! text-sm mr-2 last:mr-0 last:mb-2 px-4 py-1 rounded-full"
-          href="/library/{{ category | slugify }}"
-        >
-          {{ category | capitalize }}
-        </a>
-      {% endfor %}
-    </div>
-  {% endif %}
-</div>
 
-<div id="content" class="pt-6 mt-8 border-t break-keep border-t-base-alt dark:border-t-[#39394b]">
-  {{ content | safe }}
+  <div class="flex flex-col flex-1 justify-between">
+    <div class="flex flex-col space-y-2">
+      {# Date, reading time #}
+      {% set created = metadata.created | date(format="%B %e, %Y") %}
+      {% set updated = metadata.updated | date(format="%B %e, %Y") %}
+      <span class="text-muted text-sm tabular-nums text-opacity-70 dark:text-opacity-100 space-x-1">
+        <time datetime="{{ metadata.created }}">{{ created }}</time>
+        {% if created != updated %}
+        (Last edit: <time datetime="{{ metadata.updated }}">{{ metadata.updated | date(format="%B %e, %Y") }}</time>)
+        {% endif %}
+      </span>
+    </div>
+    {% if metadata.categories | length > 0 %}
+      <div class="flex flex-wrap items-center mt-2 space-y-2">
+        <span class="font-semibold mr-px">Tags:&nbsp;</span>
+        {% for category in metadata.categories %}
+          {% if config.extra.tags and category in config.extra.tags %}
+            {% set tag_color = config.extra.tags[category] %}
+          {% else %}
+            {% set tag_color = "" %}
+          {% endif %}
+          <a
+            {% if tag_color %}style="--tag-color: {% if tag_color is starting_with('#') or tag_color is starting_with('rgb') or tag_color is starting_with('hsl') or tag_color is starting_with('oklch') %}{{ tag_color }}{% else %}var(--color-{{ tag_color }}){% endif %}"{% endif %}
+            class="w-fit {% if tag_color %}bg-[color-mix(in_oklab,var(--tag-color)_25%,transparent)] text-(--tag-color) hover:bg-[color-mix(in_oklab,var(--tag-color)_50%,transparent)]{% else %}bg-surface/80 dark:bg-surface/60 text-muted hover:text-text hover:bg-surface{% endif %} no-underline! hover:no-underline! text-sm mr-2 last:mr-0 last:mb-2 px-4 py-1 rounded-full"
+            href="/library/{{ category | slugify }}"
+          >
+            {{ category | capitalize }}
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="relative mt-8 lg:grid lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-8">
+    <div id="content" class="pt-6 border-t break-keep border-t-border">
+      {{ content | safe }}
+    </div>
+
+    {% if metadata.toc %}
+      {% set toc_html = generate_toc(toc=metadata.toc, list_type="ol") %}
+
+      <aside class="hidden lg:block lg:sticky lg:top-24 lg:self-start">
+        <section class="wistaria-toc-panel">
+          <div class="wistaria-toc-header">
+            <p class="wistaria-toc-title">On this page</p>
+            <button
+              type="button"
+              class="wistaria-toc-toggle"
+              :aria-expanded="open.toString()"
+              aria-label="Toggle table of contents"
+              @click="toggle()"
+            >
+              <span class="ti ti-chevron-right" :class="open ? 'rotate-90' : ''"></span>
+            </button>
+          </div>
+          <nav
+            data-toc-nav
+            class="wistaria-toc-nav"
+            x-show="open"
+            x-collapse
+            @click="closeOnMobile($event)"
+          >
+            {{ toc_html | safe }}
+          </nav>
+        </section>
+      </aside>
+
+      <button
+        type="button"
+        class="wistaria-toc-fab lg:hidden"
+        x-show="isMobile"
+        x-transition.opacity
+        :aria-expanded="open.toString()"
+        aria-controls="mobile-toc"
+        @click="toggle()"
+      >
+        <span class="ti ti-list text-lg"></span>
+        <span>Contents</span>
+      </button>
+
+      <div
+        class="wistaria-toc-backdrop lg:hidden"
+        x-show="open && isMobile"
+        x-transition.opacity
+        @click="toggle()"
+      ></div>
+
+      <section
+        id="mobile-toc"
+        class="wistaria-toc-drawer lg:hidden"
+        x-show="open && isMobile"
+        x-transition:enter="transition duration-200 ease-out"
+        x-transition:enter-start="opacity-0 translate-y-4"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition duration-150 ease-in"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 translate-y-3"
+      >
+        <div class="wistaria-toc-header">
+          <p class="wistaria-toc-title">On this page</p>
+          <button type="button" class="wistaria-toc-toggle" @click="toggle()" aria-label="Close table of contents">
+            <span class="ti ti-x"></span>
+          </button>
+        </div>
+        <nav data-toc-nav class="wistaria-toc-nav mt-2 max-h-[52dvh] overflow-y-auto" @click="closeOnMobile($event)">
+          {{ toc_html | safe }}
+        </nav>
+      </section>
+    {% endif %}
+  </div>
 </div>
 {% endblock content %}

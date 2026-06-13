@@ -62,10 +62,166 @@
 
             Alpine.data("toc", () => ({
               open: false,
+              isMobile: false,
+              activeId: "",
+              headings: [],
+              observer: null,
+              mediaQuery: null,
+
+              init() {
+                this.mediaQuery = window.matchMedia("(max-width: 1023px)");
+                this.syncViewport(this.mediaQuery.matches);
+
+                const onViewportChange = (event) => {
+                  this.syncViewport(event.matches);
+                  this.$nextTick(() => this.applyActiveState());
+                };
+                this.mediaQuery.addEventListener("change", onViewportChange);
+
+                this.collectHeadings();
+                this.syncFromHash();
+                this.prepareTocLinks();
+                this.setupObserver();
+
+                window.addEventListener("hashchange", () => {
+                  this.syncFromHash();
+                });
+
+                this.$nextTick(() => {
+                  this.applyActiveState();
+                });
+              },
+
+              syncViewport(isMobileViewport) {
+                this.isMobile = isMobileViewport;
+                this.open = !isMobileViewport;
+              },
 
               toggle() {
                 this.open = !this.open;
-                document.querySelector("#toc-toggle-icon").classList.toggle("rotate-90");
+              },
+
+              closeOnMobile(event) {
+                const link = event.target.closest("a[href^='#']");
+                if (!link) {
+                  return;
+                }
+
+                const targetId = decodeURIComponent(link.getAttribute("href").slice(1));
+                if (targetId) {
+                  this.activeId = targetId;
+                  this.applyActiveState();
+                }
+
+                if (this.isMobile) {
+                  this.open = false;
+                }
+              },
+
+              syncFromHash() {
+                const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+                if (!hash) {
+                  return;
+                }
+
+                this.activeId = hash;
+                this.applyActiveState();
+              },
+
+              collectHeadings() {
+                const content = this.$root.querySelector("#content");
+                if (!content) {
+                  this.headings = [];
+                  return;
+                }
+
+                this.headings = Array.from(content.querySelectorAll("h2[id], h3[id], h4[id], h5[id], h6[id]"));
+              },
+
+              updateActiveFromViewport() {
+                if (!this.headings.length) {
+                  return;
+                }
+
+                const activationOffset = this.isMobile ? 112 : 144;
+                let candidate = this.headings[0];
+
+                for (const heading of this.headings) {
+                  if (heading.getBoundingClientRect().top <= activationOffset) {
+                    candidate = heading;
+                  } else {
+                    break;
+                  }
+                }
+
+                if (candidate && candidate.id && candidate.id !== this.activeId) {
+                  this.activeId = candidate.id;
+                  this.applyActiveState();
+                }
+              },
+
+              setupObserver() {
+                if (!this.headings.length) {
+                  return;
+                }
+
+                this.observer = new IntersectionObserver(
+                  () => {
+                    this.updateActiveFromViewport();
+                  },
+                  {
+                    root: null,
+                    rootMargin: "-28% 0px -60% 0px",
+                    threshold: [0, 1]
+                  }
+                );
+
+                this.headings.forEach((heading) => {
+                  this.observer.observe(heading);
+                });
+              },
+
+              prepareTocLinks() {
+                this.$root.querySelectorAll("[data-toc-nav]").forEach((nav) => {
+                  nav.querySelectorAll("a[href^='#']").forEach((link) => {
+                    link.dataset.tocLink = "true";
+                  });
+                });
+              },
+
+              applyActiveState() {
+                const tocNavs = this.$root.querySelectorAll("[data-toc-nav]");
+                if (!tocNavs.length) {
+                  return;
+                }
+
+                tocNavs.forEach((nav) => {
+                  nav.querySelectorAll("a[data-toc-link]").forEach((link) => {
+                    link.dataset.active = "false";
+                  });
+
+                  nav.querySelectorAll("li").forEach((item) => {
+                    item.dataset.activeTrail = "false";
+                  });
+
+                  if (!this.activeId) {
+                    return;
+                  }
+
+                  const selector = `a[data-toc-link][href='#${CSS.escape(this.activeId)}']`;
+                  const activeLink = nav.querySelector(selector);
+                  if (!activeLink) {
+                    return;
+                  }
+
+                  activeLink.dataset.active = "true";
+
+                  let parentItem = activeLink.closest("li");
+                  while (parentItem) {
+                    parentItem.dataset.activeTrail = "true";
+                    parentItem = parentItem.parentElement?.closest("li");
+                  }
+                });
               }
             }));
 
