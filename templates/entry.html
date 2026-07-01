@@ -15,7 +15,7 @@
 {% block content %}
 <div x-data="toc" x-init="init()" class="relative">
   <div class="mb-4">
-    <h1>{{ metadata.title }}</h1>
+    <h1 class="mt-0! md:mt-4!">{{ metadata.title }}</h1>
     <p class="italic">{{ metadata.description }}</p>
   </div>
 
@@ -41,9 +41,9 @@
             {% set tag_color = "" %}
           {% endif %}
           <a
-            {% if tag_color %}style="--tag-color: {% if tag_color is starting_with('#') or tag_color is starting_with('rgb') or tag_color is starting_with('hsl') or tag_color is starting_with('oklch') %}{{ tag_color }}{% else %}var(--color-{{ tag_color }}){% endif %}"{% endif %}
+            {% if tag_color %}style="--tag-color: {% if tag_color is starting_with(pat='#') or tag_color is starting_with(pat='rgb') or tag_color is starting_with(pat='hsl') or tag_color is starting_with(pat='oklch') %}{{ tag_color }}{% else %}var(--color-{{ tag_color }}){% endif %}"{% endif %}
             class="w-fit {% if tag_color %}bg-[color-mix(in_oklab,var(--tag-color)_25%,transparent)] text-(--tag-color) hover:bg-[color-mix(in_oklab,var(--tag-color)_50%,transparent)]{% else %}bg-surface/80 dark:bg-surface/60 text-muted hover:text-text hover:bg-surface{% endif %} no-underline! hover:no-underline! text-sm mr-2 last:mr-0 last:mb-2 px-4 py-1 rounded-full"
-            href="/library/{{ category | slugify }}"
+            href="/library/{{ category | slug }}"
           >
             {{ category | capitalize }}
           </a>

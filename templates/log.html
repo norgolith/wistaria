@@ -13,7 +13,7 @@
 
 {% block title %}{{ metadata.title | title }}{% endblock title %}
 {% block content %}
-  <h1>Log</h1>
+  <h1 class="mt-0! md:mt-4!">Log</h1>
   {% if metadata.description and metadata.description != "nil" %}
   <p class="italic">{{ metadata.description }}</p>
   {% else %}
@@ -22,7 +22,7 @@
   </p>
   {% endif %}
   <div class="flex flex-col gap-8 pt-6 mt-6 border-t border-t-border">
-    {% for post in log | filter(attribute="draft", value=false) | sort(attribute="created") | reverse %}
+    {% for post in collection_log | filter(attribute="draft", value=false) | sort(attribute="created") | reverse %}
       <div class="flex flex-col md:flex-row md:gap-8">
         <span class="w-28 text-sm font-semibold tabular-nums md:my-3.5 text-muted md:pt-2">
           <time datetime="{{ post.created }}">{{ post.created | date(format="%b %e, %Y") }}</time>
@@ -42,9 +42,9 @@
                   {% set tag_color = "" %}
                 {% endif %}
                 <a
-                  {% if tag_color %}style="--tag-color: {% if tag_color is starting_with('#') or tag_color is starting_with('rgb') or tag_color is starting_with('hsl') or tag_color is starting_with('oklch') %}{{ tag_color }}{% else %}var(--color-{{ tag_color }}){% endif %}"{% endif %}
+                  {% if tag_color %}style="--tag-color: {% if tag_color is starting_with(pat='#') or tag_color is starting_with(pat='rgb') or tag_color is starting_with(pat='hsl') or tag_color is starting_with(pat='oklch') %}{{ tag_color }}{% else %}var(--color-{{ tag_color }}){% endif %}"{% endif %}
                   class="w-fit {% if tag_color %}bg-[color-mix(in_oklab,var(--tag-color)_25%,transparent)] text-(--tag-color) hover:bg-[color-mix(in_oklab,var(--tag-color)_50%,transparent)]{% else %}bg-surface/80 dark:bg-surface/60 text-muted hover:text-text hover:bg-surface{% endif %} no-underline! hover:no-underline! text-sm mr-2 last:mr-0 last:mb-2 px-4 py-1 rounded-full"
-                  href="/library/{{ category | slugify }}"
+                  href="/library/{{ category | slug }}"
                 >
                   {{ category | capitalize }}
                 </a>
