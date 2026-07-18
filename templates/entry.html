@@ -24,7 +24,7 @@
       {# Date, reading time #}
       {% set created = metadata.created | date(format="%B %e, %Y") %}
       {% set updated = metadata.updated | date(format="%B %e, %Y") %}
-      <span class="text-muted text-sm tabular-nums text-opacity-70 dark:text-opacity-100 space-x-1">
+      <span class="text-muted text-sm tabular-nums space-x-1">
         <time datetime="{{ metadata.created }}">{{ created }}</time>
         {% if created != updated %}
         (Last edit: <time datetime="{{ metadata.updated }}">{{ metadata.updated | date(format="%B %e, %Y") }}</time>)
