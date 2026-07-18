@@ -5,12 +5,12 @@ A soft theme with lavender tones and a personal notebook feel. It comes with two
 ## Installation
 
 ```bash
-lith theme pull github:NTBBloodbath/wistaria
+lith theme pull github:norgolith/wistaria
 ```
 
 > [!IMPORTANT]
 >
-> Wistaria requires a Norgolith build with [this commit](https://github.com/NTBBloodbath/norgolith/commit/e6d1a5cc75b7fc3c13e3945f0115d51631f68668) in order to work.
+> Wistaria requires Norgolith >= 1.0 in order to work.
 
 ## Usage
 
@@ -65,6 +65,35 @@ Library = '/library'
 #announcement = '#72ff47'
 ```
 
+#### Syntax Highlighting
+
+Wistaria ships a custom `prism-wistaria.css` and `tree-sitter-theme.css` adapted to its color palette.
+
+##### PrismJS
+
+Just set the highlighter engine configuration option to `prism`. You will have to manually add the
+`+html.class line-numbers` to each code block, and `+html.class diff-highlight` for diff filetype
+syntax highlighting.
+
+<img width="1372" height="238" alt="image" src="https://github.com/user-attachments/assets/bd1c9e8e-e7cd-4b81-8805-e3f3cb78af9b" />
+
+##### Tree-sitter
+
+To use it with the tree-sitter highlighter plugin:
+
+```toml
+[plugins.norgolith-tree-sitter-highlight]
+css-path = "/assets/css/tree-sitter-theme.css"
+line-numbers = true
+line-numbers-start = 1
+```
+
+> [!NOTE]
+>
+> Install the plugin with `lith plugin install norgolith-tree-sitter-highlight`. The `css-path` option
+> tells the plugin to use the theme's CSS instead of its default. The path is a URL path resolved
+> by the web server, not a filesystem path.
+
 ### Templates
 
 Wistaria provides these templates:
@@ -72,16 +101,16 @@ Wistaria provides these templates:
 ```
 templates
 ├── partials
-│   ├── footer.html  <- Footer content
-│   └── nav.html     <- Header navbar
-├── base.html        <- Main template (extends others)
-├── library.html     <- Categories list
-├── book.html        <- Category posts list
-├── default.html     <- Default template for all content
-├── home.html        <- Homepage
-├── journal.html     <- Journal collection
-├── log.html         <- Log collection
-└── entry.html       <- Blog post
+│   ├── footer.html    <- Footer content
+│   └── nav.html       <- Header navbar
+├── base.html          <- Main template (extends others)
+├── categories.html    <- Categories listing page (Library)
+├── category.html      <- Single category posts listing
+├── default.html       <- Default template for all content
+├── journal.html       <- Journal collection
+├── log.html           <- Log collection
+├── entry.html         <- Blog/journal entry
+└── 404.html           <- Error page (optional)
 ```
 
 To use a template, set the `layout` metadata in your content files. For example, in a journal/log post:
@@ -92,7 +121,7 @@ layout: entry
 
 > [!TIP]
 >
-> 1. The `library` template is used for the categories listing page, and the `book` template is used for the category posts listing page. You can customize these templates to change how your categories and their posts are displayed.
+> 1. The `categories` template is used for the categories listing page, and the `category` template is used for the category posts listing page. You can customize these templates to change how your categories and their posts are displayed.
 > 2. Wistaria expects your journal entries in the `content/journal` directory and your log entries in the `content/log` directory, as specified in the `collections` configuration. Make sure to place your content files accordingly for them to be rendered with the correct templates.
 
 ### MermaidJS Support
@@ -115,7 +144,7 @@ Wistaria comes with opt-in support for MermaidJS flowcharts. You can use mermaid
 
 ### Additional Styling
 
-Wistaria provides some additional styling options for blockquotes and code blocks that can be used with `+html.class` tags in your norg content.
+Wistaria provides some additional styling options for blockquotes that can be used with `+html.class` tags in your norg content.
 
 #### Blockquotes
 
@@ -126,13 +155,6 @@ Wistaria provides some additional styling options for blockquotes and code block
 - `error` (red)
 
 <img width="1380" height="340" alt="image" src="https://github.com/user-attachments/assets/e29d8368-3934-4e3a-aafb-43b6608f1668" />
-
-#### Code Blocks
-
-- `line-numbers` - Adds line numbers to the code block.
-- `diff-highlight` - Highlights added lines in green and removed lines in red (useful for diff outputs).
-
-<img width="1372" height="238" alt="image" src="https://github.com/user-attachments/assets/bd1c9e8e-e7cd-4b81-8805-e3f3cb78af9b" />
 
 #### Tags/categories pills
 
@@ -148,7 +170,7 @@ announcement = '#72ff47'
 
 ### Tailwind Reloading
 
-By default, Tailwind's configuration in Norgowind watches content files and templates. Each new class added to content using a `+html.class` tag will be included in the styling file.
+By default, Tailwind's configuration in Wistaria watches content files and templates. Each new class added to content using a `+html.class` tag will be included in the styling file.
 
 For site development, install the TailwindCSS CLI and run:
 ```sh
