@@ -101,17 +101,22 @@ Wistaria provides these templates:
 ```
 templates
 ├── partials
-│   ├── footer.html    <- Footer content
-│   └── nav.html       <- Header navbar
-├── base.html          <- Main template (extends others)
-├── categories.html    <- Categories listing page (Library)
-├── category.html      <- Single category posts listing
-├── default.html       <- Default template for all content
-├── journal.html       <- Journal collection
-├── log.html           <- Log collection
-├── entry.html         <- Blog/journal entry
-└── 404.html           <- Error page (optional)
+│   ├── footer.html       <- Footer content
+│   └── nav.html          <- Header navbar
+├── shortcodes
+│   └── entry_card.html   <- Reusable entry card (used via include)
+├── base.html             <- Main template (extends others)
+├── categories.html       <- Categories listing page (Library)
+├── category.html         <- Single category posts listing
+├── default.html          <- Default template for all content
+├── index.html            <- Homepage (hero + recent posts)
+├── journal.html          <- Journal collection
+├── log.html              <- Log collection
+├── entry.html            <- Blog/journal entry
+└── 404.html              <- Error page (optional)
 ```
+
+The homepage (`/`) uses `index.html` — set `layout: index` in your root `index.norg` content file. It shows a hero area with your content, then recent journal and log posts with full entry cards.
 
 To use a template, set the `layout` metadata in your content files. For example, in a journal/log post:
 
@@ -122,7 +127,8 @@ layout: entry
 > [!TIP]
 >
 > 1. The `categories` template is used for the categories listing page, and the `category` template is used for the category posts listing page. You can customize these templates to change how your categories and their posts are displayed.
-> 2. Wistaria expects your journal entries in the `content/journal` directory and your log entries in the `content/log` directory, as specified in the `collections` configuration. Make sure to place your content files accordingly for them to be rendered with the correct templates.
+> 2. The entry card component (`shortcodes/entry_card.html`) is used by `journal.html`, `log.html`, `category.html`, and `index.html`. Customize it once to change how all post listings look.
+> 3. Wistaria expects your journal entries in the `content/journal` directory and your log entries in the `content/log` directory, as specified in the `collections` configuration. Make sure to place your content files accordingly for them to be rendered with the correct templates.
 
 ### MermaidJS Support
 
