@@ -196,6 +196,11 @@
     @apply border-red bg-red/30 text-text/80;
   }
 
+  /* Fenced code blocks */
+  pre {
+    @apply my-4;
+  }
+
   /* Inline verbatim `` */
   code:not([class*="language-"]) {
     @apply font-mono bg-surface/70 px-1 rounded text-sm;
