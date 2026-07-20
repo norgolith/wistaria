@@ -180,20 +180,47 @@
   blockquote {
     @apply border-l-4 border-primary/60 bg-surface/70 md:max-w-fit py-2 px-4 rounded-r-sm italic text-muted mb-4;
   }
-  blockquote.tip {
-    @apply border-green bg-green/30 text-text/80;
-  }
-  blockquote.note {
-    @apply border-blue bg-blue/30 text-text/80;
-  }
-  blockquote.important {
-    @apply border-violet bg-violet/30 text-text/80;
-  }
-  blockquote.warning {
-    @apply border-yellow bg-yellow/30 text-text/80;
-  }
+  blockquote.tip,
+  blockquote.note,
+  blockquote.important,
+  blockquote.warning,
   blockquote.error {
-    @apply border-red bg-red/30 text-text/80;
+    @apply relative pl-10 not-italic;
+  }
+  blockquote.tip { @apply border-green bg-green/30 text-text/80; }
+  blockquote.tip::before {
+    content: "\ea51";
+    @apply absolute top-1.5 left-3 text-xl text-green;
+    font-family: "tabler-icons" !important;
+    speak: none;
+  }
+  blockquote.note { @apply border-blue bg-blue/30 text-text/80; }
+  blockquote.note::before {
+    content: "\eac5";
+    @apply absolute top-1.5 left-3 text-xl text-blue;
+    font-family: "tabler-icons" !important;
+    speak: none;
+  }
+  blockquote.important { @apply border-violet bg-violet/30 text-text/80; }
+  blockquote.important::before {
+    content: "\f634";
+    font-family: "tabler-icons" !important;
+    speak: none;
+    @apply absolute top-1.5 left-3 text-xl text-violet;
+  }
+  blockquote.warning { @apply border-yellow bg-yellow/30 text-text/80; }
+  blockquote.warning::before {
+    content: "\ea06";
+    @apply absolute top-1.5 left-3 text-xl text-yellow;
+    font-family: "tabler-icons" !important;
+    speak: none;
+  }
+  blockquote.error { @apply border-red bg-red/30 text-text/80; }
+  blockquote.error::before {
+    content: "\ea6a";
+    font-family: "tabler-icons" !important;
+    speak: none;
+    @apply absolute top-1.5 left-3 text-xl text-red;
   }
 
   /* Fenced code blocks */
@@ -291,6 +318,11 @@
 #content :is(h2[id], h3[id], h4[id], h5[id], h6[id]) {
   scroll-margin-top: 5.5rem;
 }
+
+/* #content > p:first-of-type::first-letter { */
+/*   float: left; */
+/*   @apply text-6xl font-display font-semibold text-primary leading-none mr-2 mt-1; */
+/* } */
 
 @media (min-width: 48rem) {
   #content :is(h2[id], h3[id], h4[id], h5[id], h6[id]) {
