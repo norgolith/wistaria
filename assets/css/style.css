@@ -215,6 +215,48 @@
     @apply text-border dark:brightness-120 my-4;
   }
 
+  /* For some reason time has an implicit margin-right, nuke it */
+  time {
+      @apply mr-0!;
+  }
+
+  /* Images */
+  img {
+    @apply max-w-full h-auto rounded-md my-4;
+  }
+
+  figure {
+    @apply my-4 flex flex-col items-center;
+  }
+
+  figcaption {
+    @apply text-sm text-muted italic mt-1 text-center;
+  }
+
+  /* Keyboard shortcuts */
+  kbd {
+    @apply font-mono bg-surface/80 border border-border px-1.5 py-0.5 rounded text-sm text-text shadow-xs;
+  }
+
+  /* Highlighted text */
+  mark {
+    @apply bg-violet/30 text-text px-1 rounded;
+  }
+
+  /* Tables */
+  table {
+    @apply w-full border-collapse my-4;
+  }
+  th, td {
+    @apply border border-border px-3 py-2 text-left text-sm;
+  }
+  th {
+    @apply bg-surface font-bold;
+  }
+  tr:nth-child(even) {
+    @apply bg-surface/50;
+  }
+
   /* Buttons use pointer cursor */
   button:not(:disabled),
   [role="button"]:not(:disabled) {
