@@ -199,6 +199,18 @@
         </nav>
       </section>
     {% endif %}
+
+    <button
+      x-data="{ show: false }"
+      x-on:scroll.window.throttle="show = window.scrollY > 400"
+      x-show="show"
+      x-transition
+      @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
+      class="fixed bottom-5 left-5 z-40 inline-flex items-center justify-center w-10 h-10 rounded-full border border-border bg-surface text-text shadow-lg hover:bg-surface/80 transition-colors"
+      aria-label="Back to top"
+    >
+      <span class="ti ti-arrow-up"></span>
+    </button>
   </div>
 </div>
 {% endblock content %}
