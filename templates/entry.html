@@ -68,6 +68,44 @@
       {{ content | safe }}
     </div>
 
+    {% set_global prev_post = false %}
+    {% set_global next_post = false %}
+    {% set_global found_current = false %}
+    {% set rel_dir = metadata.rel_path | split(pat="/") | first %}
+    {% if rel_dir == "journal" %}
+      {% set collection = collection_journal | filter(attribute="draft", value=false) | sort(attribute="created") %}
+    {% elif rel_dir == "log" %}
+      {% set collection = collection_log | filter(attribute="draft", value=false) | sort(attribute="created") %}
+    {% else %}
+      {% set collection = [] %}
+    {% endif %}
+    {% for post in collection %}
+      {% if found_current and not next_post %}
+        {% set_global next_post = post %}
+      {% endif %}
+      {% if post.permalink == metadata.permalink %}
+        {% set_global found_current = true %}
+      {% endif %}
+      {% if not found_current %}
+        {% set_global prev_post = post %}
+      {% endif %}
+    {% endfor %}
+
+    {% if prev_post or next_post %}
+    <div class="flex flex-col sm:flex-row justify-between mt-12 pt-6 border-t border-t-border gap-2">
+      {% if prev_post %}
+      <a href="{{ prev_post.permalink }}" class="text-muted hover:text-primary transition-colors">
+        ← {{ prev_post.title }}
+      </a>
+      {% endif %}
+      {% if next_post %}
+      <a href="{{ next_post.permalink }}" class="text-muted hover:text-primary transition-colors sm:text-right">
+        {{ next_post.title }} →
+      </a>
+      {% endif %}
+    </div>
+    {% endif %}
+
     {% if metadata.toc %}
       {% set toc_html = generate_toc(toc=metadata.toc, list_type="ol") %}
 
