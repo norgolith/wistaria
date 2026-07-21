@@ -30,11 +30,11 @@
         (Last edit: <time datetime="{{ metadata.updated }}">{{ metadata.updated | date(format="%B %e, %Y") }}</time>)
         {% endif %}
         <span class="mx-1">&middot;</span>
-        <span>{{ (content | length / 6000) | round(method="ceil") | int }} min read</span>
+        <span><span class="ti ti-clock mr-1"></span>{{ (content | length / 6000) | round(method="ceil") | int }} min read</span>
       </span>
       {% if metadata.authors and metadata.authors | length > 0 %}
       <div class="text-sm text-muted">
-        By {{ metadata.authors | join(sep=", ") }}
+        <span class="ti ti-user mr-1"></span>{{ metadata.authors | join(sep=", ") }}
       </div>
       {% endif %}
     </div>

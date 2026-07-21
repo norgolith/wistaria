@@ -325,6 +325,15 @@
               pre.style.paddingTop = "1.25rem";
               pre.appendChild(label);
             });
+
+            document.querySelectorAll("#content table").forEach((table) => {
+              if (table.parentElement?.classList.contains("table-wrapper")) return;
+              const wrapper = document.createElement("div");
+              wrapper.className = "table-wrapper";
+              table.parentNode.insertBefore(wrapper, table);
+              wrapper.appendChild(table);
+            });
+
         });
     </script>
 

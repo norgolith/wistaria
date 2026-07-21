@@ -170,6 +170,9 @@
   ul, ol {
     @apply pl-6;
   }
+  ::marker {
+    @apply text-primary;
+  }
   ul {
     @apply list-disc;
   }
@@ -329,6 +332,14 @@ pre:hover .copy-btn {
 }
 .copy-btn:hover {
   @apply bg-surface text-text;
+}
+
+/* Table wrapper for responsive horizontal scroll */
+.table-wrapper {
+  @apply my-4 overflow-x-auto;
+}
+.table-wrapper table {
+  @apply my-0;
 }
 
 /* Language label for code blocks */

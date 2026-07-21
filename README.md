@@ -42,14 +42,14 @@ footer_author_link = "https://github.com/NTBBloodbath" # Optional
 enable_mermaid = true # Enable Mermaid.js for diagrams
 
 [extra.nav]
-Journal = '/journal'
-Log = '/log'
-Library = '/library'
-# About = '/about'
+Journal = { url = "/journal", icon = "news" }
+Log = { url = "/log", icon = "notebook" }
+Library = { url = "/library", icon = "book-2" }
+# About = { url = "/about", icon = "info-circle" }
 
 [extra.footer]
-# Link_name = "url"
-# GitHub = "https://github.com/NTBBloodbath/norgolith"
+# Name = { url = "https://example.com", icon = "link" }
+# GitHub = { url = "https://github.com/user/repo", icon = "brand-github" }
 
 # Tag colors: accepts either theme color tokens or raw CSS color values.
 #

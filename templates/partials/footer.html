@@ -13,13 +13,13 @@
     {% endif %}
   </span>
   <div class="flex flex-inline {% if config.extra.license %}border-t border-t-border pt-2 md:border-none md:pt-0{% endif %}">
-    {% for name, link in config.extra.footer %}
+    {% for name, item in config.extra.footer %}
     <div class="mr-4 md:mr-6 lg:mr-8 last:mr-0">
       <a
-        href="{{ link }}"
+        href="{{ item.url }}"
         class="hover:text-primary"
       >
-        <span>{{ name | title }}</span>
+        {% if item.icon %}<i class="ti ti-{{ item.icon }} text-lg mr-1"></i>{% endif %}<span>{{ name }}</span>
       </a>
     </div>
     {% endfor %}
