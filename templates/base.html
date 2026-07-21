@@ -334,6 +334,15 @@
               wrapper.appendChild(table);
             });
 
+            document.querySelectorAll('#content h1[id], #content h2[id], #content h3[id], #content h4[id], #content h5[id], #content h6[id]').forEach(heading => {
+              if (heading.querySelector('.anchor-link')) return;
+              const link = document.createElement('a');
+              link.href = '#' + heading.id;
+              link.className = 'anchor-link';
+              link.setAttribute('aria-label', 'Link to this section');
+              link.innerHTML = '<span class="ti ti-link"></span>';
+              heading.appendChild(link);
+            });
         });
     </script>
 
