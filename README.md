@@ -130,6 +130,18 @@ layout: entry
 > 2. The entry card component (`shortcodes/entry_card.html`) is used by `journal.html`, `log.html`, `category.html`, and `index.html`. Customize it once to change how all post listings look.
 > 3. Wistaria expects your journal entries in the `content/journal` directory and your log entries in the `content/log` directory, as specified in the `collections` configuration. Make sure to place your content files accordingly for them to be rendered with the correct templates.
 
+#### Feature image / hero
+
+Add an `image` field to your entry metadata to show a hero image between the header (title, date, tags) and the article body:
+
+```norg
+@document.meta
+image: https://example.com/path/to/image.jpg
+@end
+```
+
+The image is rendered full-width with rounded corners. Optional — entries without `image` display as normal.
+
 ### MermaidJS Support
 
 Wistaria comes with opt-in support for MermaidJS flowcharts. You can use mermaid charts through embedded HTML in your norg content if you set the `enable_mermaid` option to `true` in the `extra` table of your configuration file:
@@ -154,11 +166,20 @@ Wistaria provides some additional styling options for blockquotes that can be us
 
 #### Blockquotes
 
-- `tip` (green)
-- `note` (blue)
-- `important` (violet)
-- `warning` (yellow)
-- `error` (red)
+Styled callout variants with Tabler Icons and matching border/accent colours:
+
+- `tip` (green, bulb icon)
+- `note` (blue, info circle icon)
+- `important` (violet, exclamation circle icon)
+- `warning` (yellow, alert triangle icon)
+- `error` (red, circle-x icon)
+
+Use `+html.class` before a norg blockquote:
+
+```norg
++html.class tip
+> This tip uses the bulb icon and green accent.
+```
 
 <img width="1380" height="340" alt="image" src="https://github.com/user-attachments/assets/e29d8368-3934-4e3a-aafb-43b6608f1668" />
 
@@ -173,6 +194,13 @@ announcement = '#72ff47'
 ```
 
 <img width="1392" height="485" alt="image" src="https://github.com/user-attachments/assets/8fa48976-be3a-4c1b-a5b1-5aadab9be835" />
+
+### Interactive Features
+
+Wistaria includes several Alpine.js-powered interactive enhancements:
+
+- **Copy button for code blocks** - each `pre > code` gets a copy button (top-right corner, visible on hover). Click copies the code to clipboard and briefly shows a check mark.
+- **Back-to-top button** - appears at bottom-left after scrolling past 400px. Smooth-scrolls to top on click.
 
 ### Tailwind Reloading
 
