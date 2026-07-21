@@ -331,6 +331,11 @@ pre:hover .copy-btn {
   @apply bg-surface text-text;
 }
 
+/* Language label for code blocks */
+.lang-label {
+  @apply absolute top-2 left-4.5 z-10 text-xs font-mono font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-sm bg-surface text-muted border border-border pointer-events-none select-none;
+}
+
 /* #content > p:first-of-type::first-letter { */
 /*   float: left; */
 /*   @apply text-6xl font-display font-semibold text-primary leading-none mr-2 mt-1; */

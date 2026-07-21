@@ -313,6 +313,18 @@
               });
               pre.appendChild(btn);
             });
+
+            document.querySelectorAll("pre > code").forEach((code) => {
+              const pre = code.parentElement;
+              if (!pre || pre.querySelector(".lang-label")) return;
+              const cls = code.className.match(/language-(\w+)/);
+              if (!cls) return;
+              const label = document.createElement("span");
+              label.className = "lang-label";
+              label.textContent = cls[1];
+              pre.style.paddingTop = "1.25rem";
+              pre.appendChild(label);
+            });
         });
     </script>
 
