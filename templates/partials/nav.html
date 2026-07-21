@@ -27,7 +27,7 @@
           :class="currentPage.startsWith('{{ item.url }}') ? 'text-primary border-b-primary' : 'text-muted border-b-transparent hover:text-primary hover:border-b-primary'"
           class="my-1 border-b-2 border-dotted"
           href="{{ item.url }}"
-        >{% if item.icon %}<i class="ti ti-{{ item.icon }} text-lg mr-1"></i>{% endif %}{{ name | title }}</a>
+        >{% if item.icon %}<i class="ti ti-{{ item.icon }} mr-1"></i>{% endif %}{{ name | title }}</a>
       {% endfor %}
     </div>
 
