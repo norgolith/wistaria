@@ -225,7 +225,7 @@
 
   /* Fenced code blocks */
   pre {
-    @apply my-4;
+    @apply relative my-4;
   }
 
   /* Inline verbatim `` */
@@ -294,6 +294,7 @@
   [role="button"]:not(:disabled) {
     @apply cursor-pointer;
   }
+
 }
 
 /*
@@ -317,6 +318,17 @@
 
 #content :is(h2[id], h3[id], h4[id], h5[id], h6[id]) {
   scroll-margin-top: 5.5rem;
+}
+
+/* Copy button for code blocks */
+.copy-btn {
+  @apply absolute top-2 right-2 z-10 inline-flex items-center justify-center w-7 h-7 rounded-md border border-border bg-surface/80 text-muted opacity-0 transition-opacity duration-200;
+}
+pre:hover .copy-btn {
+  @apply opacity-100;
+}
+.copy-btn:hover {
+  @apply bg-surface text-text;
 }
 
 /* #content > p:first-of-type::first-letter { */

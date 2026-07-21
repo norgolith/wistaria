@@ -295,6 +295,24 @@
                     localStorage.setItem("theme", this.current);
                 }
             }));
+
+            document.querySelectorAll("pre > code").forEach((code) => {
+              const pre = code.parentElement;
+              if (!pre || pre.querySelector(".copy-btn")) return;
+              const btn = document.createElement("button");
+              btn.className = "copy-btn";
+              btn.setAttribute("aria-label", "Copy code");
+              btn.innerHTML = '<span class="ti ti-copy"></span>';
+              btn.addEventListener("click", () => {
+                navigator.clipboard.writeText(code.textContent).then(() => {
+                  btn.innerHTML = '<span class="ti ti-check"></span>';
+                  setTimeout(() => {
+                    btn.innerHTML = '<span class="ti ti-copy"></span>';
+                  }, 2000);
+                });
+              });
+              pre.appendChild(btn);
+            });
         });
     </script>
 
