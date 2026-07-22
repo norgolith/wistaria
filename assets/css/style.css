@@ -164,7 +164,7 @@
   }
 
   p {
-    @apply leading-relaxed;
+    @apply leading-relaxed mb-4;
   }
 
   ul, ol {
@@ -181,7 +181,7 @@
   }
 
   blockquote {
-    @apply border-l-4 border-primary/60 bg-surface/70 md:max-w-fit py-2 px-4 rounded-r-sm italic text-muted mb-4;
+    @apply border-l-4 border-primary/60 bg-surface/70 md:max-w-fit py-2 px-4 rounded-r-sm italic text-muted my-4;
   }
   blockquote.tip,
   blockquote.note,
