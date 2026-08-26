@@ -49,14 +49,17 @@
     {# AlpineJS #}
     <script
       defer
-      src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.15.0/dist/cdn.min.js"
-      integrity="sha512-FpZwrr2gcxggKss7XQdSX5aqx83Q/KmBxtfpchMJuQJ5e4nUcH9vSKr8jh6HAfZiR7QzyAwm0z36lfKID8zhUg=="
+      src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs-collapse/3.16.2/cdn.min.js"
+      integrity="sha512-Y/6mIZ4JIMaAGktcpAWCxuCO/CcSFIgGOU+freooFqSZ58tFsxW4JwKVShQpuisBNnr6ffzkPkZc5Q5RE/BfUg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
     <script
       defer
-      src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js"
+      src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.16.2/cdn.min.js"
+      integrity="sha512-im92UARJWWCAxQOYBy7H8bHMiYlAHvnMgtehtHYwRXE9Y4SDTJOM0Fg66dtkJ4fY7CVEEXmbq6oBtbI9tSifmg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     ></script>
     <script>
         document.addEventListener("alpine:init", () => {
@@ -350,8 +353,8 @@
     {% if config.extra.enable_mermaid %}
     <script
       defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.12.0/mermaid.min.js"
-      integrity="sha512-5TKaYvhenABhlGIKSxAWLFJBZCSQw7HTV7aL1dJcBokM/+3PNtfgJFlv8E6Us/B1VMlQ4u8sPzjudL9TEQ06ww=="
+      src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.12.3/mermaid.min.js"
+      integrity="sha512-/yppbXbmq0NnMz+OhfzrvQDSePwPAixE8Ywi8U7KayJPv5ZFVYo7bzBgkR5V6OQ/8YHEh/gPMarWD+6ZIuNj5A=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer">
     </script>
@@ -373,7 +376,7 @@
     <link rel="icon" href="/assets/norgolith.svg" />
     {% endif %}
 
-    <title>{% block title %}{% endblock title %} > {{ config.title | title }}</title>
+    <title>{% block title %}{% endblock title %} | {{ config.title | title }}</title>
     {% endblock head %}
 </head>
 <body>
