@@ -382,12 +382,13 @@
     {% endblock head %}
 </head>
 <body>
+    <a href="#content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-bg focus:px-3 focus:py-2 focus:rounded-md focus:shadow-lg focus:border focus:border-border focus:text-text focus:outline-none">Skip to content</a>
     <div class="transition-colors duration-300 ease-linear">
       <header class="sticky top-0 z-50 w-full md:relative dark:shadow-none bg-bg/70 backdrop-blur-sm shadow-xs">
         {% include "partials/nav.html" %}
       </header>
 
-      <main class="container p-8 mx-auto min-h-[calc(100dvh-121px)] md:px-16 lg:px-24">
+      <main id="content" class="container p-8 mx-auto min-h-[calc(100dvh-121px)] md:px-16 lg:px-24">
         {% block content %}{% endblock content %}
       </main>
 
