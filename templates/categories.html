@@ -1,14 +1,4 @@
 {% extends "base.html" %}
-{% block seo_tags %}
-<meta property="og:title" content="Categories - {{ config.title | title }}" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="{{ config.rootUrl }}/library" />
-<meta property="og:description" content="Posts categories" />
-<meta property="og:site_name" content="{{ config.title }}" />
-<meta property="og:locale" content="{{ config.language }}" />
-<link rel="canonical" href="{{ config.rootUrl }}/library" />
-<meta name="robots" content="index, follow" />
-{% endblock seo_tags %}
 {% block title %}Library{% endblock title %}
 {% block content %}
 <div>
