@@ -1,4 +1,4 @@
-<nav x-data="menu" class="container px-8 mx-auto font-mono md:px-16 lg:px-24">
+<nav x-data="menu" aria-label="Main" class="container px-8 mx-auto font-mono md:px-16 lg:px-24">
   <div class="flex justify-between items-center w-full h-16">
     <div x-data="theme" class="flex items-center space-x-2 shrink-0">
       <a href="/" class="flex items-center space-x-2">
@@ -33,7 +33,7 @@
 
     {# Mobile menu button #}
     <div class="md:hidden">
-      <button @click="toggleMobile" type="button" class="inline-flex justify-center items-center p-2 rounded-md text-muted" aria-controls="mobile-menu" aria-expanded="false">
+      <button @click="toggleMobile" type="button" class="inline-flex justify-center items-center p-2 rounded-md text-muted" aria-controls="mobile-menu" :aria-expanded="openMobile.toString()">
         <span class="sr-only">Open main menu</span>
         <!-- Hamburger Icon -->
         <svg x-show="!openMobile" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

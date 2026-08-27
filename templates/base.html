@@ -24,10 +24,14 @@
     <meta property="og:title" content="{{ metadata.title | title }} - {{ config.title | title }}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ metadata.permalink }}" />
-    <meta property="og:description" content="Posts on {{ config.title | title }}" />
+    <meta property="og:description" content="{{ metadata.description | default(value='Posts on ' ~ config.title) }}" />
     <meta property="og:site_name" content="{{ config.title }}" />
     <meta property="og:locale" content="{{ config.language }}" />
-    {# TODO: add support for og:image using metadata #}
+    {% if metadata.image %}<meta property="og:image" content="{{ metadata.image }}" />{% endif %}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ metadata.title | title }} - {{ config.title | title }}" />
+    <meta name="twitter:description" content="{{ metadata.description | default(value='Posts on ' ~ config.title) }}" />
+    {% if metadata.image %}<meta name="twitter:image" content="{{ metadata.image }}" />{% endif %}
     <link rel="canonical" href="{{ metadata.permalink }}" />
     <meta name="robots" content="index, follow" />
     {% endblock seo_tags %}
@@ -388,7 +392,7 @@
         {% include "partials/nav.html" %}
       </header>
 
-      <main id="content" class="container p-8 mx-auto min-h-[calc(100dvh-121px)] md:px-16 lg:px-24">
+      <main class="container p-8 mx-auto min-h-[calc(100dvh-121px)] md:px-16 lg:px-24">
         {% block content %}{% endblock content %}
       </main>
 

@@ -142,6 +142,8 @@ image: https://example.com/path/to/image.jpg
 
 The image is rendered full-width with rounded corners. Optional — entries without `image` display as normal.
 
+The `image` field is also used in Open Graph and Twitter Card meta tags (`og:image`, `twitter:image`) for social sharing previews.
+
 #### Post navigation
 
 Entry pages show prev/next links at the bottom using the post's chronological siblings within the same collection (journal or log). Navigates by `created` date. Automatically hidden at collection boundaries.
