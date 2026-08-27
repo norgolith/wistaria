@@ -212,7 +212,7 @@ By default, Tailwind's configuration in Wistaria watches content files and templ
 
 For site development, install the TailwindCSS CLI and run:
 ```sh
-tailwindcss -i theme/assets/css/tailwind.css -o theme/assets/css/styles.min.css --minify --watch
+tailwindcss -i theme/assets/css/style.css -o theme/assets/css/style.min.css --minify --watch
 ```
 
 ## Contributing
