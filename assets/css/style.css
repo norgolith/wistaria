@@ -256,7 +256,7 @@
   }
 
   /* Images */
-  img {
+  #content img {
     @apply max-w-full h-auto rounded-md my-4;
   }
 

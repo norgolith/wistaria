@@ -222,7 +222,7 @@ Wistaria uses self-hosted [Tabler Icons](https://tabler.io/icons) (v3.46.0) webf
 
 #### Adding custom icons
 
-Any Tabler icon name works out of the no config changes needed. Reference it in your `norgolith.toml`:
+Any Tabler icon name works out of the box. Reference it in your `norgolith.toml`:
 
 ```toml
 [extra.nav]
@@ -233,6 +233,20 @@ GitHub = { url = "https://github.com/user/repo", icon = "brand-github" }
 ```
 
 Browse all available icons at [tabler.io/icons](https://tabler.io/icons).
+
+#### Custom SVG/PNG icons
+
+For non-Tabler icons (brand logos, personal icons), use `icon_src` instead of `icon`:
+
+```toml
+[extra.nav]
+GitHub = { url = "https://github.com/user/repo", icon_src = "/assets/icons/brand-github.svg" }
+
+[extra.footer]
+Logo = { url = "/", icon_src = "/assets/images/my-logo.png" }
+```
+
+Place the files anywhere under your site's asset directory. The `icon_src` field takes precedence over `icon`.
 
 ### Tailwind Reloading
 
