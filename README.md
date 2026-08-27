@@ -206,6 +206,34 @@ Wistaria includes several Alpine.js-powered interactive enhancements:
 - **Copy button for code blocks** - each `pre > code` gets a copy button (top-right corner, visible on hover). Click copies the code to clipboard and briefly shows a check mark.
 - **Back-to-top button** - appears at bottom-left after scrolling past 400px. Smooth-scrolls to top on click.
 
+### Icons
+
+Wistaria uses self-hosted [Tabler Icons](https://tabler.io/icons) (v3.46.0) webfont. All 5000+ icons are available via `<i>` tags:
+
+```html
+<i class="ti ti-calendar mr-1"></i>
+<i class="ti ti-news mr-1"></i>
+<i class="ti ti-clock mr-1"></i>
+```
+
+> [!NOTE]
+>
+> The Tabler Icons CSS is self-hosted in `assets/css/tabler-icons.min.css` with `font-display: swap` added to the original `@font-face` declaration. This avoids render-blocking, and ensures icons load immediately from the same origin. The font files live in `assets/fonts/`.
+
+#### Adding custom icons
+
+Any Tabler icon name works out of the no config changes needed. Reference it in your `norgolith.toml`:
+
+```toml
+[extra.nav]
+About = { url = "/about", icon = "info-circle" }
+
+[extra.footer]
+GitHub = { url = "https://github.com/user/repo", icon = "brand-github" }
+```
+
+Browse all available icons at [tabler.io/icons](https://tabler.io/icons).
+
 ### Tailwind Reloading
 
 By default, Tailwind's configuration in Wistaria watches content files and templates. Each new class added to content using a `+html.class` tag will be included in the styling file.

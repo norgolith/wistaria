@@ -21,8 +21,7 @@
   {% if journal_posts | length > 0 %}
   <section class="pt-6 border-t border-t-border">
     <div class="flex items-center gap-1">
-      <i class="text-3xl ti ti-news align-middle mr-1"></i>
-      <h2 class="mt-0! mb-0!">Journal</h2>
+      <h2 class="mt-0! mb-0!"><i class="ti ti-news mr-1"></i> Journal</h2>
     </div>
     <div class="flex flex-col gap-8 mt-6">
       {% for post in journal_posts %}
@@ -40,7 +39,7 @@
   {% if log_posts | length > 0 %}
   <section class="pt-6 border-t border-t-border">
     <div class="flex items-center gap-1">
-      <i class="text-3xl ti ti-notebook align-middle mr-1"></i>
+      <i class="ti ti-notebook mr-1"></i>
       <h2 class="mt-0! mb-0!">Log</h2>
     </div>
     <div class="flex flex-col gap-8 mt-6">

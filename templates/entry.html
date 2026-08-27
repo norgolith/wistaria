@@ -32,23 +32,23 @@
       {% set created = metadata.created | date(format="%B %e, %Y") %}
       {% set updated = metadata.updated | date(format="%B %e, %Y") %}
       <span class="text-muted text-sm tabular-nums space-x-1">
-        <span class="ti ti-calendar mr-1"></span>
+        <i class="ti ti-calendar mr-1"></i>
         <time datetime="{{ metadata.created }}">{{ created }}</time>
         {% if created != updated %}
         (Last edit: <time datetime="{{ metadata.updated }}">{{ metadata.updated | date(format="%B %e, %Y") }}</time>)
         {% endif %}
         <span class="mx-1">&middot;</span>
-        <span><span class="ti ti-clock mr-1"></span>{{ (content | length / 6000) | round(method="ceil") | int }} min read</span>
+        <span><i class="ti ti-clock mr-1"></i>{{ (content | length / 6000) | round(method="ceil") | int }} min read</span>
       </span>
       {% if metadata.authors and metadata.authors | length > 0 %}
       <div class="text-sm text-muted">
-          <span class="ti ti-user mr-1"></span>{{ metadata.authors | join(sep=", ") }}
+          <i class="ti ti-user mr-1"></i>{{ metadata.authors | join(sep=", ") }}
       </div>
       {% endif %}
     </div>
     {% if metadata.categories | length > 0 %}
     <div class="flex flex-wrap items-center mt-2 space-y-2">
-        <span class="ti ti-tags mr-1"></span><span class="text-sm font-semibold mr-px">Tags:&nbsp;</span>
+        <i class="ti ti-tags mr-1"></i><span class="text-sm font-semibold mr-px">Tags:&nbsp;</span>
         {% for category in metadata.categories %}
         {% if config.extra.tags and category in config.extra.tags %}
         {% set tag_color = config.extra.tags[category] %}
@@ -60,7 +60,7 @@
                 class="flex items-center w-fit {% if tag_color %}bg-[color-mix(in_oklab,var(--tag-color)_25%,transparent)] text-(--tag-color) hover:bg-[color-mix(in_oklab,var(--tag-color)_50%,transparent)]{% else %}bg-surface/80 dark:bg-surface/60 text-muted hover:text-text hover:bg-surface{% endif %} no-underline! hover:no-underline! text-sm mr-2 last:mr-0 last:mb-2 px-4 py-1 rounded-full"
                 href="/library/{{ category | slug }}"
                 >
-                <span class="ti ti-tag mr-1"></span>{{ category | capitalize }}
+                <i class="ti ti-tag mr-1"></i>{{ category | capitalize }}
         </a>
         {% endfor %}
     </div>
@@ -127,7 +127,7 @@
               aria-label="Toggle table of contents"
               @click="toggle()"
               >
-              <span class="ti ti-list"></span>
+              <i class="ti ti-list"></i>
               <span class="sr-only">Open table of contents</span>
       </button>
 
@@ -152,7 +152,7 @@
                               aria-label="Close table of contents"
                               @click="toggle()"
                               >
-                              <span class="ti ti-x"></span>
+                              <i class="ti ti-x"></i>
                       </button>
                   </div>
                   <nav
@@ -174,7 +174,7 @@
               aria-controls="mobile-toc"
               @click="toggle()"
               >
-              <span class="ti ti-list"></span>
+              <i class="ti ti-list"></i>
               <span>Contents</span>
       </button>
 
@@ -199,7 +199,7 @@
               <div class="wistaria-toc-header">
                   <p class="wistaria-toc-title">On this page</p>
                   <button type="button" class="wistaria-toc-toggle" @click="toggle()" aria-label="Close table of contents">
-                      <span class="ti ti-x"></span>
+                      <i class="ti ti-x"></i>
                   </button>
               </div>
               <nav data-toc-nav class="wistaria-toc-nav mt-2 max-h-[52dvh] overflow-y-auto" @click="closeOnMobile($event)">
@@ -217,7 +217,7 @@
               class="fixed bottom-5 left-5 z-40 inline-flex items-center justify-center w-10 h-10 rounded-full border border-border bg-surface text-text shadow-lg hover:bg-surface/80 transition-colors"
               aria-label="Back to top"
               >
-              <span class="ti ti-arrow-up"></span>
+              <i class="ti ti-arrow-up"></i>
     </button>
   </div>
 </div>
