@@ -250,6 +250,18 @@ Logo = { url = "/", icon_src = "/assets/images/my-logo.png" }
 
 Place the files anywhere under your site's asset directory. The `icon_src` field takes precedence over `icon`.
 
+#### Reducing unused icon CSS
+
+The full Tabler Icons CSS contains 5000+ icon rules. If you only use a subset, you can tree-shake the unused rules after building your site:
+
+```sh
+npx purgecss --css public/assets/css/tabler-icons.min.css \
+  --content "public/**/*.html" \
+  --output public/assets/css/
+```
+
+This scans your built HTML files, keeps only the icon classes actually used, and overwrites `tabler-icons.min.css` with the smaller result. Typical savings: 200KB down to 5-20KB depending on icon usage.
+
 ### Tailwind Reloading
 
 By default, Tailwind's configuration in Wistaria watches content files and templates. Each new class added to content using a `+html.class` tag will be included in the styling file.
