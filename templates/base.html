@@ -24,13 +24,13 @@
     <meta property="og:title" content="{{ metadata.title | title }} - {{ config.title | title }}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ metadata.permalink }}" />
-    <meta property="og:description" content="{{ metadata.description | default(value='Posts on ' ~ config.title) }}" />
+    <meta property="og:description" content="{{ metadata.description | default(value=config.description) }}" />
     <meta property="og:site_name" content="{{ config.title }}" />
     <meta property="og:locale" content="{{ config.language }}" />
     {% if metadata.image %}<meta property="og:image" content="{{ metadata.image }}" />{% endif %}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{ metadata.title | title }} - {{ config.title | title }}" />
-    <meta name="twitter:description" content="{{ metadata.description | default(value='Posts on ' ~ config.title) }}" />
+    <meta name="twitter:description" content="{{ metadata.description | default(value=config.description) }}" />
     {% if metadata.image %}<meta name="twitter:image" content="{{ metadata.image }}" />{% endif %}
     <link rel="canonical" href="{{ metadata.permalink }}" />
     <meta name="robots" content="index, follow" />
