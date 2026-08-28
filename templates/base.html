@@ -49,9 +49,9 @@
       {# PrismJS #}
       {% if config.highlighter.engine is string and config.highlighter.engine == "prism" %}
         <link rel="stylesheet" href="{{ "/assets/css/prism-wistaria.css" | fingerprint }}" />
-        <script defer src="/assets/js/prism.min.js"></script>
-        <script defer src="/assets/js/prism-autoloader.min.js"></script>
-        <script defer src="/assets/js/prism-line-numbers.min.js"></script>
+        <script defer src="{{ "/assets/js/prism.min.js" | fingerprint }}"></script>
+        <script defer src="{{ "/assets/js/prism-autoloader.min.js" | fingerprint }}"></script>
+        <script defer src="{{ "/assets/js/prism-line-numbers.min.js" | fingerprint }}"></script>
       {% elif config.highlighter.engine is not string or config.highlighter.engine == "tree-sitter" %}
         <link rel="stylesheet" href="{{ "/assets/css/tree-sitter-theme.css" | fingerprint }}" />
       {% elif config.highlighter.engine is string
@@ -65,11 +65,11 @@
     {# AlpineJS #}
     <script
       defer
-      src="/assets/js/alpinejs-collapse.min.js"
+      src="{{ "/assets/js/alpinejs-collapse.min.js" | fingerprint }}"
     ></script>
     <script
       defer
-      src="/assets/js/alpinejs.min.js"
+      src="{{ "/assets/js/alpinejs.min.js" | fingerprint }}"
     ></script>
     <script>
         document.addEventListener("alpine:init", () => {
@@ -371,7 +371,7 @@
     {% if config.extra.enable_mermaid %}
     <script
       defer
-      src="/assets/js/mermaid.min.js"
+      src="{{ "/assets/js/mermaid.min.js" | fingerprint }}"
     ></script>
     {% endif %}
 
