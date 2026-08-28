@@ -368,7 +368,7 @@
     </script>
 
     {# MermaidJS #}
-    {% if config.extra.enable_mermaid %}
+    {% if config.extra.enable_mermaid and content contains 'class="mermaid"' %}
     <script
       defer
       src="{{ "/assets/js/mermaid.min.js" | fingerprint }}"

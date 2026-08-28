@@ -3,7 +3,7 @@
     {% if config.extra.footer_author_link %}
     <a
       href="{{ config.extra.footer_author_link }}"
-      class="hover:underline text-blue">{{ config.author }}</a
+      class="underline hover:no-underline text-blue">{{ config.author }}</a
     >.
     {% else %}
     {{ config.author }}.
