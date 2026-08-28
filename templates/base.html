@@ -21,6 +21,7 @@
 
     {# SEO Meta Tags #}
     {% block seo_tags %}
+    {% if metadata %}
     <meta property="og:title" content="{{ metadata.title | title }} - {{ config.title | title }}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ metadata.permalink }}" />
@@ -34,6 +35,7 @@
     {% if metadata.image %}<meta name="twitter:image" content="{{ metadata.image }}" />{% endif %}
     <link rel="canonical" href="{{ metadata.permalink }}" />
     <meta name="robots" content="index, follow" />
+    {% endif %}
     {% endblock seo_tags %}
 
     {# Prevent FUOC #}

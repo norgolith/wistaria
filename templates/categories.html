@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Library{% endblock title %}
+{% block seo_tags %}
+<meta property="og:title" content="Library - {{ config.title | title }}" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="{{ config.description }}" />
+<meta property="og:site_name" content="{{ config.title }}" />
+<meta property="og:locale" content="{{ config.language }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Library - {{ config.title | title }}" />
+<meta name="twitter:description" content="{{ config.description }}" />
+<meta name="robots" content="index, follow" />
+{% endblock seo_tags %}
 {% block content %}
 <div>
   <h1 class="mt-0! md:mt-4!">Library</h1>
